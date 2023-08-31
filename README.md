@@ -1,6 +1,6 @@
 # booki_php
 
-## première phase : Module de connexion
+## Première phase : Module de connexion
 
 ### Description : 
 Créez un module de connexion simple qui permet aux utilisateurs de se 
