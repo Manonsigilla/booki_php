@@ -1,3 +1,18 @@
+<div align="center">
+  <a href="https://Manonsigilla.github.io/Booki_php/">
+    <img src="/booki/img/Booki.png" alt="Logo Booki" width="180">
+  </a>
+</div>
+
+<p align="center">
+    <br>
+    <a href="https://github.com/Manonsigilla/Booki_php">Voir les documents</a>
+    &nbsp;
+    ·
+    &nbsp;
+    <a href="https://github.com/Manonsigilla/Booki_php/issues">Rapporter une erreur</a>
+</p>
+
 # booki_php
 
 ## Première phase : Module de connexion
