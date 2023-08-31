@@ -17,23 +17,12 @@
 
     <main>
         <div>
-            <?php
-                $username = $_POST['login'];
-                $password = $_POST['password'];
-                if ($username == $datauser[0]['login'] && $password == $datauser[0]['password']) {
-                    echo "Bonjour " . $username . " !";
-                    setcookie("username", $username, time() + 3600,);
-                    } else {
-                    session_start();
-                    $_SESSION['$errorMsg'] = "Pas les bons identifiants !";
-                    header("Location: index.php");
-                }
-                if (isset($_POST['Se déconnecter'])) {
-                    setcookie("username", $username, time() - 3600,);
-                    echo "Vous êtes déconnecté";
-                }   
-            ?>
-            ?>
+            <h2>Bienvenue 
+                <?php if (isset($_SESSION["username"]) === true){
+                    echo $_SESSION['username'];
+                } else {
+                    echo "Utilisateur introuvable !";
+                } ?></h2>
             <form method="post" action="index.php">
                 <input type="submit" value="Se déconnecter">
             </form>

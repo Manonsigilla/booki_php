@@ -15,14 +15,14 @@
         include 'header.php';
     ?>
     <main>
-       <section id="detailvignettes">
-        <img src="img/hotelduport.jpg" alt="alt image ici">
-        <article>
-            <h1>Titre hébergement ou activité</h1>
-            <p class="prixhebergement">le prix est ...</p>
-            <p class="description">mettre la description/lorem ici</p>
-        </article>
-       </section>
+        <section id="detailvignettes">
+            <img src="img/hotelduport.jpg" alt="alt image ici">
+            <article>
+                <h1>Titre hébergement ou activité</h1>
+                <p class="prixhebergement">le prix est ...</p>
+                <p class="description">mettre la description/lorem ici</p>
+            </article>
+        </section>
     </main>
 
     <?php

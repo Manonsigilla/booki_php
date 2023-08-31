@@ -1,20 +1,25 @@
 <?php
 session_start();
-$errorMsg = "";
-$validUser = $_SESSION["login"] === true;
-if (isset($_SESSION[$errorMsg])) {
-    echo $_SESSION[$errorMsg];
-    unset($_SESSION[$errorMsg]);
+include_once "donneesutilisateur.php";
+$errorMsg = "Invalid username or password.";
+$submitted = isset($_POST["sub"]);
+if ($submitted) {
+    $login = $POST["login"];
+    $password = $POST["password"];
+
+    foreach ($datauser as $user) {
+        if ($user['login'] == $login && $user['password'] == $password) {
+            $_SESSION['login'] = true;
+            $_SESSION['username'] = $user['$login'];
+            header("Location: /bienvenue.php");
+            die();
+        }
+    }
+    $_SESSION[$errorMsg] = $errorMsg;
 }
-if(isset($_POST["sub"])) {
-    $validUser = $_POST["username"] == "admin" && $_POST["password"] == "password";
-    if(!$validUser) $errorMsg = "Invalid username or password.";
-        else $_SESSION["login"] = true;
-}
-if($validUser) {
-    header("Location: /bienvenue.php"); die();
-}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -74,7 +79,7 @@ if($validUser) {
                     <?php include "hebergement.php"; ?>
                     <?php foreach ($hebergements as $hebergement) { ?>
                         <article>
-                            <a href="single_hebergement.php?id=<?= $hebergement["id"] ?>">
+                            <a href="single_hebergement.php?id=<?= $hebergement["id"]; ?>">
                                 <img src="<?= $hebergement["img"] ?>" alt="<?= $hebergement["alt"] ?>">
 
                                 <div class="infozone">
