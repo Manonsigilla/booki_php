@@ -1,6 +1,7 @@
 <?php
     $populaires = [
         [
+            "id" => 1,
             "nom" => "Auberge La Canebière",
             "prix" => "Nuit à partir de 25€",
             "img" => "img/aubergelacanebière.jpg",
@@ -12,6 +13,7 @@
             "rating5" => "fa-solid fa-star empty"
         ],
         [
+            "id" => 2,
             "nom" => "Chambre d'hôtes au coeur de l'eau",
             "prix" => "Nuit à partir de 71€",
             "img" => "img/chambred'hoteaucoeurdel'eau.jpg",
@@ -23,6 +25,7 @@
             "rating5" => "fa-solid fa-star empty"
         ],
         [
+            "id" => 3,
             "nom" => "Hôtel Bleu et Blanc",
             "prix" => "Nuit à partir de 68€",
             "img" => "img/hotelbleuetblanc.jpg",
