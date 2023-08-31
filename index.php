@@ -110,7 +110,7 @@ if ($submitted) {
                     <?php include "populaire.php"; ?>
                     <?php foreach ($populaires as $populaire) { ?>
                         <article>
-                            <a href="#">
+                        <a href="single_populaire.php?id=<?= $hebergement["id"]; ?>">
                                 <img src="<?= $populaire["img"] ?>" alt="<?= $populaire["alt"] ?>">
 
                                 <div class="infozone">
@@ -138,7 +138,7 @@ if ($submitted) {
             <div>
                 <?php include "activites.php"; ?>
                 <?php foreach ($activites as $activite) { ?>
-                    <a href="#">
+                    <a href="single_activite.php?id=<?= $hebergement["id"]; ?>">
                         <figure>
                             <img src="<?= $activite["img"] ?>" alt="<?= $activite["alt"] ?>">
 
