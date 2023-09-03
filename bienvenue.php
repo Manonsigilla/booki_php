@@ -1,4 +1,20 @@
+<?php session_start(); 
 
+if (!isset($_SESSION['username'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$username = $_SESSION['username'];
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,14 +33,9 @@
 
     <main>
         <div>
-            <h2>Bienvenue 
-                <?php if (isset($_SESSION["username"]) === true){
-                    echo $_SESSION['username'];
-                } else {
-                    echo "Utilisateur introuvable !";
-                } ?></h2>
+            <h2>Bienvenue <?php echo $username; ?>!</h2>
             <form method="post" action="index.php">
-                <input type="submit" value="Se déconnecter">
+                <input type="submit" name="logout" value="Se déconnecter">
             </form>
         </div>
         <section id="findhebergement">
@@ -57,114 +68,26 @@
                 <h2>Hébergement à Marseille</h2>
 
                 <div>
+                    <?php include "hebergement.php"; ?>
+                    <?php foreach ($hebergements as $hebergement) { ?>
+                        <article>
+                            <a href="single_hebergement.php?id=<?= $hebergement["id"]; ?>">
+                                <img src="<?= $hebergement["img"] ?>" alt="<?= $hebergement["alt"] ?>">
 
-                    <article>
-                        <a href="#">
-                            <img src="img/hotelduport.jpg" alt="Hotel du port">
-
-                            <div class="infozone">
-                                <h3>Hôtel du port</h3>
-                                <p>Nuit à partir de 52€</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
+                                <div class="infozone">
+                                    <h3><?= $hebergement["nom"] ?></h3>
+                                    <p>Nuit à partir de <?= $hebergement["prix"] ?>€</p>
+                                    <div class="rating">
+                                        <i class="<?=$hebergement["rating1"];?>"></i>
+                                        <i class="<?=$hebergement["rating2"];?>"></i>
+                                        <i class="<?=$hebergement["rating3"];?>"></i>
+                                        <i class="<?=$hebergement["rating4"];?>"></i>
+                                        <i class="<?=$hebergement["rating5"];?>"></i>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </article>
-
-                    <article>
-                        <a href="#">
-                            <img src="img/hotelchezamina.jpg" alt="Hôtel Chez Amina">
-
-                            <div class="infozone">
-                                <h3>Hôtel Chez Amina</h3>
-                                <p>Nuit à partir de 96€</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-
-                    <article>
-                        <a href="#">
-                            <img src="img/hotellesmouettes.jpg" alt="Hôtel les mouettes">
-
-                            <div class="infozone">
-                                <h3>Hôtel les mouettes</h3>
-                                <p>Nuit à partir de 76€</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-
-                    <article>
-                        <a href="#">
-                            <img src="img/hoteldelamer.jpg" alt="Hôtel de la mer">
-
-                            <div class="infozone">
-                                <h3>Hôtel de la mer</h3>
-                                <p>Nuit à partir de 46€</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-
-                    <article>
-                        <a href="#">
-                            <img src="img/aubergelacanebière.jpg" alt="Auberge La Canebière">
-                            
-                            <div class="infozone">
-                                <h3>Auberge La Canebière</h3>
-                                <p>Nuit à partir de 25€</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-
-                    <article>
-                        <a href="#">
-                            <img src="img/aubergelepanier.jpg" alt="Auberge Le panier">
-    
-                            <div class="infozone">
-                                <h3>Auberge Le panier</h3>
-                                <p>Nuit à partir de 23€</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
+                            </a>
+                        </article>
+                    <?php } ?>
                 </div>
                 <a href="#">Afficher plus</a>
             </div>
@@ -176,65 +99,28 @@
                 </div>
 
                 <div id="aside_card">
-                    <article>
-                        <a href="#">
-                            <img src="img/aubergelacanebière.jpg" alt="Auberge La Canebière">
-    
-                            <div class="infozone">
-                                <div>
-                                    <h3>Auberge La Canebière</h3>
-                                    <p>Nuit à partir de 25€</p>
+                    <?php include "populaire.php"; ?>
+                    <?php foreach ($populaires as $populaire) { ?>
+                        <article>
+                            <a href="single_populaire.php?id=<?= $populaire["id"]; ?>">
+                                <img src="<?= $populaire["img"] ?>" alt="<?= $populaire["alt"] ?>">
+
+                                <div class="infozone">
+                                    <div>
+                                        <h3><?= $populaire["nom"] ?></h3>
+                                        <p><?= $populaire["prix"] ?></p>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="<?= $populaire["rating1"] ?>"></i>
+                                        <i class="<?= $populaire["rating2"] ?>"></i>
+                                        <i class="<?= $populaire["rating3"] ?>"></i>
+                                        <i class="<?= $populaire["rating4"] ?>"></i>
+                                        <i class="<?= $populaire["rating5"] ?>"></i>
+                                    </div>
                                 </div>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-    
-                    <article>
-                        <a href="#">
-                            <img src="img/chambred'hoteaucoeurdel'eau.jpg" alt="Chambre d'hôtes au coeur de l'eau">
-    
-                            <div class="infozone">
-                                <div>
-                                    <h3>Chambre d'hôtes au coeur de l'eau</h3>
-                                    <p>Nuit à partir de 71€</p>
-                                </div>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-    
-                    <article>
-                        <a href="#">
-                            <img src="img/hotelbleuetblanc.jpg" alt="Hôtel Bleu et Blanc">
-    
-                            <div class="infozone">
-                                <div>
-                                    <h3>Hôtel Bleu et Blanc</h3>
-                                    <p>Nuit à partir de 68€</p>
-                                </div>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star empty"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
+                            </a>
+                        </article>
+                    <?php } ?>
                 </div>
 
             </aside>
@@ -243,32 +129,18 @@
         <section id="activites">
             <h2>Activités à Marseille</h2>
             <div>
-                <a href="#">
-                    <figure>
-                        <img src="img/vieuxport.jpg" alt="Vieux port">
-                        <figcaption>
-                            Vieux-Port
-                        </figcaption>
-                    </figure>
-                </a>
-                <a href="#">
-                    <figure>
-                        <img src="img/fortdepomègues.jpg" alt="Fort de pomègues">
-                        <figcaption>Fort de pomègues</figcaption>
-                    </figure>
-                </a>
-                <a href="#">
+                <?php include "activites.php"; ?>
+                <?php foreach ($activites as $activite) { ?>
+                    <a href="single_activite.php?id=<?= $activite["id"]; ?>">
                         <figure>
-                        <img src="img/Parcnational.jpg" alt="Parc national des Calanques">
-                        <figcaption>Parc national des Calanques</figcaption>
-                    </figure>
-                </a>
-                <a href="#">
-                        <figure>
-                        <img src="img/Notredame.jpg" alt="Activités près de Notre-Dame-de-la-Garde">
-                        <figcaption>Notre-Dame-de-la-Garde</figcaption>
-                    </figure>
-                </a>
+                            <img src="<?= $activite["img"] ?>" alt="<?= $activite["alt"] ?>">
+
+                            <figcaption>
+                                <?= $activite["nom"] ?>
+                            </figcaption>
+                        </figure>
+                    </a>
+                <?php } ?>
             </div>
         </section>
     </main>

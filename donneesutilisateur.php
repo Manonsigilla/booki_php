@@ -1,8 +1,6 @@
 <?php
-    $datauser = [
-        [
-            'login' => 'Manon',
-            'password' => 'toto'
-        ]
+    $users = [
+        "username" => "Manon",
+        "password" => "1234"
     ]
 ?>

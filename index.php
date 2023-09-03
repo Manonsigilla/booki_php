@@ -2,20 +2,16 @@
 session_start();
 include_once "donneesutilisateur.php";
 $errorMsg = "Invalid username or password.";
-$submitted = isset($_POST["sub"]);
-if ($submitted) {
-    $login = $POST["login"];
-    $password = $POST["password"];
-
-    foreach ($datauser as $user) {
-        if ($user['login'] == $login && $user['password'] == $password) {
-            $_SESSION['login'] = true;
-            $_SESSION['username'] = $user['$login'];
-            header("Location: /bienvenue.php");
-            die();
-        }
+$submitted = isset($_POST["username"]) && isset($_POST["password"]);
+foreach ($users as $user) {
+    if ($submitted && $user["username"] === $_POST["username"] && $user["password"] === $_POST["password"]) {
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["password"] = $user["password"];
+        header("Location: /bienvenue.php");
+        exit();
+    } else {
+        $_SESSION["errorMsg"] = $errorMsg;
     }
-    $_SESSION[$errorMsg] = $errorMsg;
 }
 
 ?>
@@ -38,9 +34,10 @@ if ($submitted) {
 
     <main>
         <div class="connexion">
+            <?php if (isset($errorMsg)) { echo "<p class='erreur'>$errorMsg</p>"; } ?>
             <form method="post" action="bienvenue.php">
-                <label for="login">Login</label>
-                <input type="text" name="login" id="login">
+                <label for="username">Login</label>
+                <input type="text" name="username" id="login">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
                 <input type="submit" value="Connexion">
